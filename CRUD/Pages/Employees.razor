@@ -1,0 +1,38 @@
+﻿@page "/employees"
+
+
+@inject CRUD.Data.EmployeeService EmployeeService;
+<h1>Employees</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var employee in employees)
+            {
+                <tr>
+                    <td>@employee.Id</td>
+                    <td>@employee.Name</td>
+                    <td>
+                        <a href="employee/@employee.Id">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+@code {
+    private List<CRUD.Data.Employee> employees;
+
+    protected override void OnInitialized()
+    {
+        employees = EmployeeService.GetEmployees();
+    }
+
+}
